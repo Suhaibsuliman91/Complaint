@@ -37,6 +37,15 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("[action]")]
+        public IActionResult GetAllForUser(int UserID)
+        {
+            var EntityComplaint = _unitOfWork.Complaint.Find(e=>e.UserID == UserID).ToList();
+            var DTOComplaint = _mapper.Map<List<DTO.Complaint>>(EntityComplaint);
+            return Ok(DTOComplaint);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
         public IActionResult GetByID(int ID)
         {
             var EntityComplaint = _unitOfWork.Complaint.GetByID(ID);
@@ -52,7 +61,7 @@ namespace API.Controllers
             Complaint.Attachment = String.Empty;
             foreach (var item in Complaint.AttachmentInfo)
             {
-                var SavedFileUrl = WriteAttachment(item, _iWebHostEnvironment.ContentRootPath + "\\Files\\");
+                var SavedFileUrl = WriteAttachment(item, _iWebHostEnvironment.WebRootPath + "\\Files\\");
                 Complaint.Attachment += SavedFileUrl;
             }
             var EntityComplaint = _mapper.Map<Data.Complaint>(Complaint);
@@ -67,42 +76,10 @@ namespace API.Controllers
         [Route("[action]")]
         public IActionResult Update(DTO.Complaint Complaint)
         {
-            Complaint.Demands = RemoveExistenDemands(Complaint.Demands.ToList());
             var EntityComplaint = _mapper.Map<Data.Complaint>(Complaint);
             _unitOfWork.Complaint.Update(EntityComplaint);
             _unitOfWork.Complete();
-            return Ok(Complaint);
-        }
-
-        [HttpDelete]
-        [Route("[action]")]
-        public IActionResult Delete(DTO.Complaint Complaint)
-        {
-            var EntityComplaint = _unitOfWork.Complaint.GetByID(Complaint.ID);
-            EntityComplaint.IsDeleted = Complaint.IsDeleted;
-            _unitOfWork.Complaint.Update(EntityComplaint);
-            _unitOfWork.Complete();
-            return Ok(Complaint);
-        }
-
-
-        private List<DTO.Demand> RemoveExistenDemands(List<DTO.Demand> demands) 
-        {
-            var AllDemands = _unitOfWork.Demand.GetAll().ToList();
-            var DTOAllDemands = _mapper.Map<List<DTO.Demand>>(AllDemands);
-            List <DTO.Demand> TempDemands = new List<DTO.Demand>();
-            foreach (var demand in demands) 
-            {
-                var TempDemand = DTOAllDemands.Find(e => e.ID == demand.ID && e.DescriptionEn == demand.DescriptionEn) != null;
-                if (!TempDemand)
-                {
-                    TempDemands.Add(demand);
-                    //demands.Remove(demand);
-                }
-            }
-
-            return TempDemands;
-
+            return Ok(_mapper.Map<DTO.Complaint>(EntityComplaint));
         }
 
         private string WriteAttachment(DTO.FileInfo FileInfo, string SavedFilePath)
@@ -121,7 +98,7 @@ namespace API.Controllers
         [Route("[action]")]
         public IActionResult DownloadFile(/*[FromForm]*/ string fileName)
         {
-            var filepath = Path.Combine( _iWebHostEnvironment.ContentRootPath + $"\\Files\\{fileName}");
+            var filepath = Path.Combine( _iWebHostEnvironment.WebRootPath + $"\\Files\\{fileName}");
             //var filepath = Path.Combine(_iWebHostEnvironment.WebRootPath, "Files", Splitted);
 
             System.IO.FileInfo fileInfo = new System.IO.FileInfo(filepath);

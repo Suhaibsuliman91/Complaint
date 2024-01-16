@@ -13,6 +13,7 @@ namespace Service.InterFace
         public IRepositoryUserType UserType { get; }
         public IRepositoryComplaint Complaint { get; }
         public IRepositoryDemand Demand { get; }
+        public IRepositoryStatus Status { get; }
         void Complete();
     }
 }

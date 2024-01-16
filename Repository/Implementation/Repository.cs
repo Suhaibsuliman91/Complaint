@@ -4,6 +4,7 @@ using Repository.InterFace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,11 @@ namespace Repository.Implementation
             return _AppDBContext.Set<T>().Add(entity).Entity;
         }
 
-      
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        {
+            return _AppDBContext.Set<T>().Where(e => e.IsDeleted == false).Where(predicate);
+        }
+
 
         public IEnumerable<T> GetAll()
         {

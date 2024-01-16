@@ -20,6 +20,6 @@ namespace Data
         public virtual User? User { get; set; }
         public virtual Status? Status { get; set; }
 
-        public virtual ICollection<Demand>? Demand { get; set; }
+        public virtual ICollection<Demand>? Demands { get; set; }
     }
 }

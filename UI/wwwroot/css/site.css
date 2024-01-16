@@ -8,10 +8,6 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -20,3 +16,51 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.Required:after {
+    content: " *";
+    color: red;
+}
+
+/*************JS Tree************/
+
+#myUL {
+    list-style-type: none;
+}
+
+#myUL {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.caret {
+    cursor: pointer !important;
+    -webkit-user-select: none !important;  /*Safari: 3.1+ */
+    -moz-user-select: none !important;  /*Firefox: 2+ */
+    -ms-user-select: none !important;  /*IE: 10+ */
+    user-select: none !important;
+    vertical-align: baseline !important;
+}
+
+.caret::before {
+    content: "\25B6" !important;
+    color: black !important;
+    display: inline-block !important;
+    margin-right: 6px !important;
+}
+
+.caret-down::before {
+    -ms-transform: rotate(90deg) !important;  IE 9 
+    -webkit-transform: rotate(90deg) !important;  Safari 
+    /*' transform: rotate(90deg);*/
+}
+
+.nested {
+    display: none !important;
+}
+
+.active {
+    display: block !important;
+}
+
+/*******************************/

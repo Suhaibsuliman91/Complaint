@@ -1,49 +1,197 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using UI.Helper;
+@using Newtonsoft.Json;
+@using System.Globalization;
+<!DOCTYPE html>
+<html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - UI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/UI.styles.css" asp-append-version="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+@*     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script> *@
+
+    <title> Complaint  </title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <ink href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+
+        <link href="~/content/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+        <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" type="text/css">
+        <link href="~/Content/plugins/dataTables/datatables.min.css" rel='stylesheet' type='text/css'>
+        <link href='~/Content/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/animate.css' rel='stylesheet' type='text/css'>
+        <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+        <link href="~/Scripts/plugins/jquery-ui/jquery-ui.min.css" type="text/css" />
+        <link href='~/fonts/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/iCheck/custom.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/datapicker/datepicker3.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/clockpicker/clockpicker.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/dropzone/basic.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/dropzone/dropzone.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/jasny/jasny-bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/select2/select2.min.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/chosen/bootstrap-chosen.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/sweetalert/sweetalert.css' rel='stylesheet' type='text/css'>
+        <link href='~/Content/plugins/steps/jquery.steps.css' rel='stylesheet' type='text/css'>
+        <link href="~/content/plugins/summernote/summernote.css" rel="stylesheet" />
+        <link href="~/content/plugins/summernote/summernote-bs3.css" rel="stylesheet" />
+        <link href="~/Content/plugins/jsTree/style.css" rel="stylesheet" />
+
+
+        <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/peity/jquery.peity.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/iCheck/icheck.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/dataTables/datatables.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/jeditable/jquery.jeditable.js"></script>
+        <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/pace/pace.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/app/inspinia.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/datapicker/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/clockpicker/clockpicker.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/summernote/summernote.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/pwstrength/zxcvbn.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/dropzone/dropzone.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/chosen/chosen.jquery.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/steps/jquery.steps.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/validate/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/jsTree/jstree.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/plugins/chartist/chartist.min.js"></script>
+        
+        <link href="~/Content/onoffswitch-ltr.css" rel='stylesheet' type='text/css' />
+        <style>
+            .right {
+                right: 0;
+                left: auto;
+            }
+
+        .onoffswitch-inner:before {
+            content: "yes";
+        }
+
+        .onoffswitch-inner:after {
+            content: "no";
+        }
+        </style>
+ 
+         <link href="~/css/flag-icons.css" rel="stylesheet" />
+         <script src="~/js/DeleteControl.js"></script>
+
+        <script type="text/javascript" src="~/js/initializeComponents.js"></script>
+        
+
+
+        
+    <style>
+        .popover.top {
+            z-index: 2050;
+        }
+
+        .nav-header {
+            padding: 33px 0px;
+        }
+    </style>
+
+
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <!-- Skin configuration box -->
+    @Html.Partial("_SkinConfig")
+
+    <!-- Wrapper-->
+    <!-- PageClass give you ability to specify custom style for specific view based on action -->
+    <div id="wrapper" class="@Html.PageClass()">
+
+        <!-- Navigation -->
+        @Html.Partial("_Navigation")
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar")
+
+            <!-- Main view  -->
+            @RenderBody()
+
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+
+        </div>
+        <!-- End page wrapper-->
+        <!-- Right Sidebar -->
+        @Html.Partial("_RightSidebar")
+
+    </div>
+    <!-- End wrapper-->
+    <!-- Section for main scripts render -->
+    <!-- Skin config script - only for demo purpose-->
+    }
+
+
+    <div class="modal fade" id="WarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="WarningMessage"></div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <script type="text/javascript" src="~/js/Demand.js"></script>
+    <script type="text/javascript" src="~/js/ChangeStatus.js"></script>
+
+
 </body>
 </html>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.dataTables-example').DataTable({
+            pageLength: 25,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [  
+                { extend: 'copy' },
+                { extend: 'csv' },
+                { extend: 'excel', title: 'ExampleFile' },
+                { extend: 'pdf', title: 'ExampleFile' },
+
+                {
+                    extend: 'print',
+                    customize: function (win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+
+        });
+        initializeComponents();
+
+        
+    });
+</script>

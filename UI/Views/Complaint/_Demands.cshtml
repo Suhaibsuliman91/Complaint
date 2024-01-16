@@ -1,0 +1,28 @@
+﻿@model DTO.Complaint
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="text-align:center">ID</th>
+            <th style="text-align:center">DescriptionEN</th>
+            <th style="text-align:center">DescriptionAR</th>
+        </tr>
+    </thead>
+    <tbody id="DemandTabel">
+        @if(Model.Demands == null)
+        {
+            Model.Demands = new List<DTO.Demand>();
+        }
+        @foreach (var Demand in Model.Demands)
+        {
+            @Html.Partial("_DemandDetails", Demand)
+        }
+    </tbody>
+
+</table>

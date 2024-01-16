@@ -1,0 +1,76 @@
+﻿@using UI.Helper
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>INSPINIA | @ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <!-- Add local styles, mostly for plugins css file -->
+    @if (IsSectionDefined("Styles"))
+        {@RenderSection("Styles", required: false)}
+     
+    <!-- Add jQuery Style direct - used for jQGrid plugin -->
+@*    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+*@    
+<link href='~/Scripts/plugins/jquery-ui/jquery-ui.min.css' rel='stylesheet' type='text/css'>
+@*        <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+*@
+
+    <!-- Primary Inspinia style -->     
+    <link href='~/fonts/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
+    <link href='~/Content/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href='~/Content/animate.css' rel='stylesheet' type='text/css'>
+    <link href='~/Content/style.css' rel='stylesheet' type='text/css'>
+@*   <link href="@Url.Content("/fonts/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/animate.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />*@
+</head>
+<body class="top-navigation">
+
+    <!-- Skin configuration box -->
+    @Html.Partial("_SkinConfig")
+
+    <!-- Wrapper-->
+    <!-- PageClass give you ability to specify custom style for specific view based on action -->
+    <div id="wrapper" class="@Html.PageClass()">
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar2")
+
+            <!-- Main view  -->
+            @RenderBody()
+
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+
+        </div>
+        <!-- End page wrapper-->
+
+    </div>
+    <!-- End wrapper-->
+
+    <!-- Section for main scripts render -->
+   <!-- Section for main scripts render -->
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+    <script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Scripts/plugins/pace/pace.min.js"></script>
+    <script src="~/Scripts/app/inspinia.js"></script>
+
+    <!-- Skin config script - only for demo purpose-->
+        <script src="~/Scripts/app/skin.config.min.js"></script>
+
+    <!-- Handler for local scripts -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -10,6 +10,8 @@ namespace Data
     public class User : BaseEntity
     {
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string Mobile { get; set; }
         public int UserTypeID { get; set; }
         public virtual UserType? UserType { get; set; }

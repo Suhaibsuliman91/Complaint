@@ -134,6 +134,10 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -144,6 +148,10 @@ namespace Repository.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserTypeID")
                         .HasColumnType("int");
 
@@ -152,6 +160,18 @@ namespace Repository.Migrations
                     b.HasIndex("UserTypeID");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "Admin@admin.com",
+                            IsDeleted = false,
+                            Mobile = "0790000000",
+                            Name = "Admin",
+                            Password = "Admin123",
+                            UserTypeID = 1
+                        });
                 });
 
             modelBuilder.Entity("Data.UserType", b =>
@@ -171,6 +191,20 @@ namespace Repository.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("UserType");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            IsDeleted = false,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            IsDeleted = false,
+                            Name = "User"
+                        });
                 });
 
             modelBuilder.Entity("Data.Complaint", b =>
@@ -195,7 +229,7 @@ namespace Repository.Migrations
             modelBuilder.Entity("Data.Demand", b =>
                 {
                     b.HasOne("Data.Complaint", "Complaint")
-                        .WithMany("Demand")
+                        .WithMany("Demands")
                         .HasForeignKey("ComplaintID")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -216,7 +250,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Data.Complaint", b =>
                 {
-                    b.Navigation("Demand");
+                    b.Navigation("Demands");
                 });
 
             modelBuilder.Entity("Data.Status", b =>

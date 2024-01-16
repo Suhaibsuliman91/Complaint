@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20240115151321_Initial.cs" />
+    <Compile Remove="Migrations\20240115151321_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20240115203330_15012024_1133.cs" />
+    <Compile Remove="Migrations\20240115203330_15012024_1133.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.15" />

@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Shared - Old\**" />
+    <Compile Remove="wwwroot - Old\**" />
+    <Content Remove="Views\Shared - Old\**" />
+    <Content Remove="wwwroot - Old\**" />
+    <EmbeddedResource Remove="Views\Shared - Old\**" />
+    <EmbeddedResource Remove="wwwroot - Old\**" />
+    <None Remove="Views\Shared - Old\**" />
+    <None Remove="wwwroot - Old\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

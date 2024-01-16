@@ -1,0 +1,154 @@
+﻿@model DTO.Complaint
+@using UI.Helper
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Complaint</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Complaint")">List AutomationType</a>
+            </li>
+
+            <li class="active">
+                <strong>Create Complaint</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+
+
+    @using (Html.BeginForm("Save", "Complaint", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+    {
+        <div class="ibox-content">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-11">
+                        @Html.HiddenFor(e => e.ID)
+                        @Html.HiddenFor(e => e.StatusID, new { @name="Complaint.StatusID" })
+                        <span class="help-block m-b-none"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div>
+                        <span class="col-sm-1 sm-offset-1"><label class="control-label">@Html.DisplayNameFor(e => e.status)</label></span>
+                        <span class="col-sm-3">
+                            @Html.DisplayFor(e => e.status.Name, new { @class = "form-control", @readonly = "readonly" })
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div>
+                        <span class="col-sm-1 sm-offset-1"><label class="control-label">@Html.DisplayNameFor(e => e.DescriptionEn)</label></span>
+                        <span class="col-sm-3">
+                            @* @Html.EditorFor(e => e.DescriptionEn, new { htmlattributes= new{ @class = "form-control", @id = "Complaint.DescriptionEn", @name = "Complaint.DescriptionEn" } }) *@
+                            <input type="text" asp-for="DescriptionEn" name="Complaint.DescriptionEn" class="form-control" />
+                            @Html.ValidationMessageFor(e=>e.DescriptionEn,"", new { @class="text-danger" })
+                        </span>
+                    </div>
+                    <div>
+                        <span class="col-sm-1 sm-offset-1"><label class="control-label">@Html.DisplayNameFor(e => e.DescriptionAR)</label></span>
+                        <span class="col-sm-3">
+                            @* @Html.TextBoxFor(e => e.DescriptionAR, new { @class = "form-control", name = "Complaint.DescriptionAR" }) *@
+                            <input type="text" asp-for="DescriptionAR" name="Complaint.DescriptionAR" class="form-control" />
+                            @Html.ValidationMessageFor(e => e.DescriptionAR, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-3 col-md-2 col-lg-2 control-label">@Html.DisplayNameFor(e=>e.Attachment)</label>
+                    <div class="fileinput fileinput-new input-group col-sm-8 col-md-8 col-lg-8" data-provides="fileinput">
+                        <div class="form-control" data-trigger="fileinput">
+                            <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                            <span class="fileinput-filename "></span>
+                        </div>
+                        <span class="input-group-addon btn btn-default btn-file ">
+                            <span class="fileinput-new"><i class="fa fa-paperclip"></i></span>
+                            <span class="fileinput-exists">ChangeAction</span>
+                            @Html.TextBoxFor(e => e.Attachment, new { type = "file", multiple = "multiple" })
+                        </span>
+                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">RemoveAction</a>
+                    </div>
+                    @Html.ValidationMessageFor(e => e.Attachment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="row">
+                    <div>
+                        <h2>Demands</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div>
+                        <span class="col-sm-1 sm-offset-1"><label class="control-label">DescriptionEn</label></span>
+                        <span class="col-sm-3">
+                            @* @Html.TextBoxFor(e => e.DescriptionEn, new { @class = "form-control" }) *@
+                            <input type="text" id="Description_en" />
+                            @* @Html.ValidationMessageFor(e => e.DescriptionEn, "", new { @class = "text-danger" }) *@
+                        </span>
+                    </div>
+                    <div>
+                        <span class="col-sm-1 sm-offset-1"><label class="control-label">DescriptionAR</label></span>
+                        <span class="col-sm-3">
+                            @* @Html.TextBoxFor(e => e.DescriptionAR, new { @class = "form-control" }) *@
+                            <input type="text" id="Description_ar" />
+                            @* @Html.ValidationMessageFor(e => e.DescriptionAR, "", new { @class = "text-danger" }) *@
+                        </span>
+                    </div>
+                    <div>
+                        <span id="AddDemand" class="btn btn-warning btn-circle  btn-outline"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            @Html.Partial("_Demands", Model)
+
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-sm-12 col-sm-offset-9  col-md-12 col-md-offset-8  col-lg-4 col-lg-offset-8">
+
+
+                        <span>
+                            <a href="@Url.Action("Index","Complaint")" class="btn btn-warning btn-circle  btn-outline ">
+                                <i class="fa fa-close"></i>
+                            </a>
+                        </span>
+
+                        <span>
+                            <button class="btn btn-primary btn-circle  btn-outline" type="submit">
+                                <i class="fa fa-save"></i>
+                            </button>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>
+

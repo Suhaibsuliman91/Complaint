@@ -19,6 +19,7 @@ namespace Service.InterFace
         public IRepositoryComplaint Complaint { get; set; }
 
         public IRepositoryDemand Demand { get; set; }
+        public IRepositoryStatus Status { get; set; }
 
         public UnitOfWork(AppDBContext dBContext)
         {
@@ -27,6 +28,7 @@ namespace Service.InterFace
             UserType = new RepositoryUserType(dBContext);
             Complaint = new RepositoryComplaint(dBContext);
             Demand = new RepositoryDemand(dBContext);
+            Status = new RepositoryStatus(dBContext);
         }
 
         public void Complete()

@@ -17,7 +17,7 @@ namespace Data.Map
             entityBuilder.Property(t => t.DescriptionAr).IsRequired(false);
             entityBuilder.Property(t => t.Attachment).IsRequired(false);
 
-            entityBuilder.HasMany(t => t.Demand).WithOne(u => u.Complaint).HasForeignKey(e => e.ComplaintID)
+            entityBuilder.HasMany(t => t.Demands).WithOne(u => u.Complaint).HasForeignKey(e => e.ComplaintID)
                 .OnDelete(DeleteBehavior.NoAction);
 
         }

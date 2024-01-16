@@ -61,7 +61,41 @@ namespace Repository
                  }
              );
 
-           
+            modelBuilder.Entity<UserType>()
+          .HasData(
+              new UserType
+              {
+                  ID = 1,
+                  IsDeleted = false,
+                  Name = "Admin"
+                  
+              },
+             
+              new UserType
+              {
+                  ID = 2,
+                  IsDeleted = false,
+                  Name = "User"
+
+              }
+              );
+
+            modelBuilder.Entity<User>()
+          .HasData(
+              new User
+              {
+                  ID = 1,
+                  IsDeleted = false,
+                  Name = "Admin",
+                  Email="Admin@admin.com",
+                  Password="Admin123",
+                  UserTypeID=1,
+                  Mobile="0790000000"
+              }
+
+             
+              );
+
 
         }
     }

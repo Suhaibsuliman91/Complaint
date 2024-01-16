@@ -5,5 +5,6 @@
         IUserClient User { get; }
         IComplaintClient Complaint { get; }
         IUserTypeClient UserType { get; }
+        IClientStatus Status { get; }
     }
 }

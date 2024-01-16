@@ -1,0 +1,12 @@
+﻿
+@if (Context.User.Identity.IsAuthenticated)
+{
+
+    var Image = "../Images/unknown.jpg";
+
+    <div class="dropdown profile-element profile-text text-center">
+        <span>
+            <img alt="image" class="img-circle" src="@Image" />
+        </span>
+    </div>
+}

@@ -4,7 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<ServiceSetting>(builder.Configuration.GetSection("HttpClient"));
+builder.Services.AddHttpClient<IClientContainer, ClientContainer>();
 
 var app = builder.Build();
 
@@ -25,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Login}/{id?}");
 
 app.Run();

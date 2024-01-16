@@ -1,0 +1,32 @@
+﻿@using UI.Helper
+@inject IHttpContextAccessor _Context;
+@{
+    _Context.HttpContext.Request.Cookies.TryGetValue("ID", out var UserID);
+}
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                @Html.Partial("_LoginPartial.cshtml")
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+           
+
+            <li class="@Html.IsSelected(controller: "Home")">
+                <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label" data-i18n="nav.dashboard"> Application </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Graphs", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Complaint")"> Complaint</a></li>
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Register", "User")"> Register</a></li>
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Login", "User")"> Login</a></li>
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Profile", "User", new { UserID = UserID })"> Profile</a></li>
+
+                </ul>
+
+            </li>
+
+        </ul>
+    </div>
+</nav>

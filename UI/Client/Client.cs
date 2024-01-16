@@ -28,12 +28,12 @@ namespace UI.Client
                 IEnumerable<T> objResult = JsonConvert.DeserializeObject<IEnumerable<T>>(objReponse);
                 return objResult;
             }
-            return null;
+            return new List<T>().AsEnumerable<T>();
         }
 
         public async Task<T> GetByID(int Id)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"{_ControllerName}/GetByID?Id=" + Id);
+            HttpResponseMessage response = await _httpClient.GetAsync($"{_ControllerName}/GetByID?ID=" + Id);
             if (response.IsSuccessStatusCode)
             {
                 var objReponse = await response.Content.ReadAsStringAsync();

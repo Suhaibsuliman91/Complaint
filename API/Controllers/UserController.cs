@@ -44,7 +44,7 @@ namespace API.Controllers
         public IActionResult Create(DTO.User User)
         {
             var DataUser = _mapper.Map<Data.User>(User);
-            DataUser.UserTypeID = 1;
+            DataUser.UserTypeID = 2;
             _unitOfWork.User.Create(DataUser);
             _unitOfWork.Complete();
             User.ID = DataUser.ID;
@@ -71,5 +71,35 @@ namespace API.Controllers
             _unitOfWork.Complete();
             return Ok(User);
         }
+
+        //[HttpPost]
+        //[Route("[action]")]
+        //public IActionResult Register(DTO.User User)
+        //{
+        //    Data.User DataUser = _mapper.Map<Data.User>(User);
+        //    _unitOfWork.User.Create(DataUser);
+        //    _unitOfWork.Complete();
+
+        //    User.ID = DataUser.ID;
+
+        //    return Ok(User);
+        //}
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult Login(string Email, string Password)
+        {
+            Data.User DataUser = _unitOfWork.User.Find(e=>e.Email.ToLower().Trim() == Email.ToLower().Trim() 
+                                                       && e.Password.ToLower().Trim() == Password.ToLower().Trim()).FirstOrDefault();
+
+            if(DataUser != null)
+            {
+                DTO.User User = _mapper.Map<DTO.User>(DataUser);
+                return Ok(User);
+            }
+
+            return NotFound();
+        }
+
     }
 }
